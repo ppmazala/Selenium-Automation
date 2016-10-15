@@ -1,8 +1,11 @@
 package com.backbase.pages;
 
+import java.util.Collection;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public class SearchPage extends AbstractPage{
 	
@@ -20,6 +23,12 @@ public class SearchPage extends AbstractPage{
 	
 	public void navigateToPage (){
 		getDriver().get("https://www.google.com");
+	}
+
+	@Override
+	protected Collection<ExpectedCondition<WebElement>> loadedCondition() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

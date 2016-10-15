@@ -1,33 +1,54 @@
 package com.backbase.pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class AddEditComputerPage {
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+
+public class AddEditComputerPage extends AbstractPage {
+
+	public void navigateToCreateNewCP() {
+		getDriver().get("http://computer-database.herokuapp.com/computers/new");
+		getDriver().manage().window().maximize();
+	}
+
+	public String getNameText() {
+		WebElement name = getElementByLocator(By.id("name")); 
+		return name.getAttribute("value");
+	}
 	
-	@FindBy(id = "name")
-	private WebElement name;
+	public void deleteComputer() {
+		WebElement deleteBtn = getElementByLocator(By.className(("danger")));
+		deleteBtn.click();
+	}
 	
-	@FindBy(id = "introduced")
-	private WebElement introduced;
+	public void addUpdateComputer(String cpName, String companyName) {
+		isLoaded();
+		WebElement name = getElementByLocator(By.id("name")); 
+		WebElement introduced = getElementByLocator(By.id("introduced"));
+		WebElement discontinued = getElementByLocator(By.id("discontinued"));
+		Select dropdown = new Select(getElementByLocator(By.id("company")));
+		WebElement createCP = getElementByLocator(By.className("primary"));
+		
+		name.clear();
+		name.sendKeys(cpName);
+		introduced.clear();
+		introduced.sendKeys("1991-10-10");
+		discontinued.clear();
+		discontinued.sendKeys("1991-10-10");
+		dropdown.selectByVisibleText(companyName);
+		createCP.click();
+	}
 	
-	@FindBy(id = "discontinued")
-	private WebElement discontinued;
-	
-	@FindBy(id = "company")
-	private WebElement company;
-	
-	@FindBy(id = "Create this computer")
-	private WebElement createComputer;
-	
-	@FindBy(className = "btn")
-	private WebElement cancelButton;
-	
-	@FindBy(className = "btn danger")
-	private WebElement deleteComputer;
-	
-	
-	
-	
-	
+	@Override
+	protected Collection<ExpectedCondition<WebElement>> loadedCondition() {
+		List<ExpectedCondition<WebElement>> ec = new ArrayList<ExpectedCondition<WebElement>>();
+		ec.add(ExpectedConditions.presenceOfElementLocated(By.id("name")));
+		return ec;
+	}
 }
