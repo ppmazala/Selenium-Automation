@@ -18,26 +18,14 @@ public class ComputerHomePage extends AbstractPage {
 		WebElement add = getDriver().findElement(By.id("add"));
 		add.click();
 	}
-	
-	/*public List<String> clickOnFirstLinkResults() {
-	 List<WebElement> tableResult = getDriver().findElements(By.xpath("//table//tr/td[1]"));
-	 WebElement link = getDriver().findElement(By.xpath("(//td/a)[1]"));
-	 List<String> results = new ArrayList<>();
-	 
-	 for (WebElement row : tableResult) {
-		 	
-		 	if (TestContext.get("Computer Name").equals(row.getText())) {
-		 		link.click();
-		 		break;
-			}
-		}
-	 
-	    return results;
-	}*/
-	
+
 	public void clickFirstLink() {
 		WebElement link = getDriver().findElement(By.xpath("(//td/a)[1]"));
 		link.click();
+	}
+	
+	public void closeBrowser() {
+	    getDriver().close();
 	}
 
 	public void typeSearchText(String searchText) {

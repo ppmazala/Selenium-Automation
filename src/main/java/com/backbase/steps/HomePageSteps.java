@@ -45,7 +45,7 @@ public class HomePageSteps {
 	
 	@Then("User exit application")
 	public void exitApplication() {
-		p.clickFirstLink();
+		p.closeBrowser();
 	}
 	
 	@Then("A $createUpdateDelete Sucess Message displays on Home Page")
